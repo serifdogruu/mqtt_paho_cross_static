@@ -1,0 +1,32 @@
+make clean
+
+make CC=arm-linux-gnueabihf-gcc \
+     CFLAGS="-march=armv7-a -marm -mfpu=vfp -mfloat-abi=hard" \
+     LDFLAGS="-march=armv7-a"
+
+# If you want the static library:
+make install PREFIX=$(pwd)/install
+
+
+
+
+arm-linux-gnueabihf-gcc mqtt_server.c \
+  -I/path/to/paho.mqtt.c/src \
+  -L/path/to/paho.mqtt.c/build/output \
+  -lpaho-mqtt3c \
+  -o mqtt_server_arm
+
+
+
+arm-linux-gnueabihf-gcc mqtt_client.c \
+  -I/path/to/paho.mqtt.c/src \
+  -L/path/to/paho.mqtt.c/build/output \
+  -lpaho-mqtt3c \
+  -o mqtt_client_arm
+
+
+
+🔧 Tip: Use -static if you want fully static binaries (no need to ship .so files).
+
+scp mqtt_server_arm user@arm-device.local:~/mqtt_server
+scp mqtt_client_arm user@arm-device.local:~/mqtt_client
