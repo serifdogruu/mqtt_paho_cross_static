@@ -1,0 +1,14 @@
+if you get openssl configuration error u shoul compile cmake in the build file wit these codes ;
+
+$ cd paho.mqtt.c
+$ rm -rf build
+$ mkdir build && cd build
+
+
+
+$ cmake .. \
+  -DPAHO_WITH_SSL=FALSE \
+  -DPAHO_BUILD_STATIC=TRUE \
+  -DPAHO_BUILD_SHARED=FALSE \
+  -DCMAKE_C_COMPILER=arm-linux-gnueabihf-gcc \
+  -DCMAKE_C_FLAGS="-march=armv7-a -marm -mfpu=vfp -mfloat-abi=hard"
